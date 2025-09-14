@@ -112,6 +112,8 @@ class ParkingManager {
 
         slot?.removeVehicle();
 
+        this.vehicleSlotMap.delete(vehicle);
+
         this.availableParkingSlots.add(slot);
     }
 
@@ -229,14 +231,33 @@ class ParkingLot {
         return ticket;
     }
 
-    removeVehicle(ticket: Ticket) {
+    removeVehicle(ticket: Ticket, paymentMethod: IPaymentMethod) {
         this.parkingManager.removeVehicle(ticket.getVehicle());
 
         const fare: number = this.fareCalculator.getFare(ticket);
 
+        paymentMethod.pay(fare);
+
         return fare;
     }
 }
+
+interface IPaymentMethod {
+    pay(amount: number): void;
+}
+
+class Card implements IPaymentMethod {
+    pay(amount: number) {
+        // Pay via card
+    }
+}
+
+class Cash implements IPaymentMethod {
+    pay(amount: number) {
+        // Pay via cash
+    }
+}
+
 
 
 const car: Vehicle = new Car('KA51ME8301');
@@ -261,10 +282,13 @@ const carTicket = lot.parkVehicle(car);
 const bikeTicket = lot.parkVehicle(bike);
 const truckTicket = lot.parkVehicle(truck);
 
+const card = new Card();
+const cash = new Cash();
+
 setTimeout(() => {
-    const fare1 = lot.removeVehicle(carTicket);
-    const fare2 = lot.removeVehicle(bikeTicket);
-    const fare3 = lot.removeVehicle(truckTicket);
+    const fare1 = lot.removeVehicle(carTicket, card);
+    const fare2 = lot.removeVehicle(bikeTicket, card);
+    const fare3 = lot.removeVehicle(truckTicket, cash);
 
     console.log(fare1);
     console.log(fare2);
