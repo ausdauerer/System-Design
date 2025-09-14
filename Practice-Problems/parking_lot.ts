@@ -232,11 +232,11 @@ class ParkingLot {
     }
 
     removeVehicle(ticket: Ticket, paymentMethod: IPaymentMethod) {
-        this.parkingManager.removeVehicle(ticket.getVehicle());
-
         const fare: number = this.fareCalculator.getFare(ticket);
 
         paymentMethod.pay(fare);
+
+        this.parkingManager.removeVehicle(ticket.getVehicle());
 
         return fare;
     }
