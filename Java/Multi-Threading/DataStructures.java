@@ -108,6 +108,7 @@ public class DataStructures {
 
         q.element();
         q.peek();
+        q.size();
 
 
         Deque<Integer> stack = new LinkedList<>();
@@ -126,6 +127,7 @@ public class DataStructures {
         stack.peekFirst();
         stack.removeFirst();
         stack.pollFirst();
+        stack.size();
 
         // Same as above for last example - addLast, offerLast, etc.
 
@@ -139,5 +141,7 @@ public class DataStructures {
 
         q.element();
         q.peek();
+
+        q.size();
     }
 }
