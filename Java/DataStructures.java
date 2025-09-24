@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DataStructures {
     public static void main(String[] args) {
@@ -143,5 +146,36 @@ public class DataStructures {
         q.peek();
 
         q.size();
+
+
+        // Blocking Structures
+
+        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<Integer>();
+        LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>();
+        PriorityBlockingQueue<Integer> queue = new PriorityBlockingQueue<Integer>();
+
+
+        // Both these operations are blocking and the thread will keep waiting for the element or wait to put if the queue is full
+        queue.put(1);
+        queue.take();
+
+        //Concurrent data structures
+
+        ConcurrentHashMap<Integer> map = new ConcurrentHashMap<Integer>();
+        ConcurrentLinkedQueue<Integer> queue = new ConcurrentLinkedQueue<Integer>();
+        ConcurrentLinkedDeque<Integer> queue = new ConcurrentLinkedDeque<Integer>();
+
+        AtomicInteger i = new AtomicInteger(1);
+
+        AtomicLong i = new AtomicLong();
+        AtomicBoolean b = new AtomicBoolean();
+
+        i.compareAndSet(0, 1);
+        i.getAndIncrement();
+        i.incrementAndGet();
+        i.addAndGet(1);
+        i.getAndAdd(1);
+        i.get();
+
     }
 }
